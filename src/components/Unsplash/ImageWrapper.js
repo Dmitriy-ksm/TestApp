@@ -1,16 +1,11 @@
 import {whileStatement} from '@babel/types';
 import React, {useState, useEffect} from 'react';
-import {
-  Image,
-  Text,
-  View,
-  ScrollView,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import {Image, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import ImageUnsplash from './ImageUnsplash';
+
+import ImagesStyle from '../../styles/images';
 
 const ImageWrapper = ({route, navigation}) => {
   const {images, currentIndexProps} = route.params;
@@ -38,29 +33,14 @@ const ImageWrapper = ({route, navigation}) => {
   }, [curIndex]);
 
   return (
-    <View style={{flex: 1, height: '100%'}}>
+    <View style={ImagesStyle.mainImageLayout}>
       {takePrev && (
         <TouchableOpacity
-          style={{
-            position: 'absolute',
-            top: 0,
-            height: '100%',
-            left: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1,
-          }}
+          style={ImagesStyle.mainImageTouchableLeft}
           onPress={() => {
             setCurIndex(curIndex - 1);
           }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 50,
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            }}>
-            {'<'}
-          </Text>
+          <Text style={ImagesStyle.mainImageTouchableArrows}>{'<'}</Text>
         </TouchableOpacity>
       )}
       {realImage && (
@@ -75,26 +55,11 @@ const ImageWrapper = ({route, navigation}) => {
 
       {takeNext && (
         <TouchableOpacity
-          style={{
-            position: 'absolute',
-            top: 0,
-            height: '100%',
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 1,
-          }}
+          style={ImagesStyle.mainImageTouchableRight}
           onPress={() => {
             setCurIndex(curIndex + 1);
           }}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 50,
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            }}>
-            >
-          </Text>
+          <Text style={ImagesStyle.mainImageTouchableArrows}>></Text>
         </TouchableOpacity>
       )}
     </View>

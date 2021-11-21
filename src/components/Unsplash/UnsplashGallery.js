@@ -1,12 +1,15 @@
 import React from 'react';
 import {Text, View, Button, TouchableOpacity, ScrollView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {fetchUnsplash} from '../../store/action-creater/changeUnsplash';
+import {fetchUnsplash} from '../../store/action-creator/changeUnsplash';
 import ImageUnsplash from './ImageUnsplash';
 
+import {SMALL_IMAGE_HEIGHT, SMALL_IMAGE_WIDTH} from '../../const/constants';
+
+import ImagesStyle from '../../styles/images';
+
 import Config from 'react-native-config';
-//const imageParams = "&w=500&h=100&dpr=2";
-const imageParams = '&w=100&h=100&dpr=3';
+const imageParams = `&w=${SMALL_IMAGE_WIDTH}&h=${SMALL_IMAGE_HEIGHT}&dpr=3`;
 
 const UnsplashGallery = ({navigation}) => {
   const unsplash = useSelector(state => state.unsplash);
@@ -40,19 +43,13 @@ const UnsplashGallery = ({navigation}) => {
   return (
     <View>
       <ScrollView>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-          }}>
+        <View style={ImagesStyle.galleryLayout}>
           {unsplash.images.map(
             (image, index) =>
               image && (
                 <View key={index}>
                   <TouchableOpacity
-                    style={{width: 100, height: 100}}
+                    style={ImagesStyle.galleryImageContainer}
                     onLongPress={() =>
                       navigation.navigate('Image', {
                         images: unsplash.images,
@@ -65,7 +62,9 @@ const UnsplashGallery = ({navigation}) => {
                       alt={image.alt}
                     />
                   </TouchableOpacity>
-                  <Text numberOfLines={1} style={{width: 100}}>
+                  <Text
+                    numberOfLines={1}
+                    style={ImagesStyle.galleryImageAuthorContainer}>
                     {image.user}
                   </Text>
                 </View>
