@@ -1,11 +1,12 @@
 import {STATEMENT_OR_BLOCK_KEYS} from '@babel/types';
 import {ActionSheetIOS} from 'react-native';
+import {UnsplashAction, UnsplashState} from 'types/unsplashTypes';
 
 export const INITIAL_REQUEST = 'UNSPLASH_INITIAL_REQUEST';
 export const ERROR_REQUEST = 'UNSPLASH_ERROR_REQUEST';
 export const LOAD_MORE = 'UNSPLASH_LOAD_MORE';
 
-const initialState = {
+const initialState: UnsplashState = {
   images: [],
   pages: 1,
   lastPage: false,
@@ -13,7 +14,10 @@ const initialState = {
   error: null,
 };
 
-const unsplashReducer = (state = initialState, action) => {
+const unsplashReducer = (
+  state = initialState,
+  action: UnsplashAction,
+): UnsplashState => {
   switch (action.type) {
     case INITIAL_REQUEST:
       return {

@@ -8,13 +8,16 @@ import {SMALL_IMAGE_HEIGHT, SMALL_IMAGE_WIDTH} from '../../const/constants';
 
 import ImagesStyle from '../../styles/images';
 
-import Config from 'react-native-config';
+import {useTypedSelector} from '../../hooks/useTypedSelector';
+
+import {useAppDispatch} from '../../store/store';
+
 const imageParams = `&w=${SMALL_IMAGE_WIDTH}&h=${SMALL_IMAGE_HEIGHT}&dpr=3`;
 
 const UnsplashGallery = ({navigation}) => {
-  const unsplash = useSelector(state => state.unsplash);
+  const unsplash = useTypedSelector(state => state.unsplash);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const dispathImages = fetchUnsplash(unsplash.pages);
   async function requestImages() {
     await dispathImages(dispatch);

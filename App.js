@@ -30,11 +30,9 @@ import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import configureStore from './src/store/configureStore';
+import store from './src/store/store';
 import UnsplashGallery from './src/components/Unsplash/UnsplashGallery';
 import ImageWrapper from './src/components/Unsplash/ImageWrapper';
-
-const store = configureStore();
 
 const Stack = createNativeStackNavigator();
 
